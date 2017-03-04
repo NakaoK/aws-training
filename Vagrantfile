@@ -1,3 +1,5 @@
+Dotenv.load
+
 Vagrant.configure("2") do |config|
   # Vagrant Box
   config.vm.box = "dummy"
@@ -19,13 +21,13 @@ Vagrant.configure("2") do |config|
     aws.ami = "ami-c68fc7a1"
     aws.region = "ap-northeast-1"
     aws.availability_zone = "ap-northeast-1c"
-    aws.security_groups = ['sg-8897d1ef']
+    aws.security_groups = ENV['AWS_SECURITY_GROUP']
     aws.elastic_ip = true
     aws.associate_public_ip = true
-    aws.subnet_id = "subnet-594ac601"
+    aws.subnet_id = ENV['AWS_SUBNET_ID']
 
     # Login Configuration
-    aws.keypair_name = "default"
+    aws.keypair_name = ENV['AWS_KEY_PAIR_NAME']
     override.ssh.username = "ubuntu"
     override.ssh.private_key_path = "~/.ssh/default.pem"
 
