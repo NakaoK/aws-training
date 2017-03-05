@@ -7,6 +7,12 @@ Vagrant.configure("2") do |config|
   # Rsync Directory
   config.vm.synced_folder "setup", "/vagrant", type: "rsync"
 
+  # Ansible
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.playbook = "provision/common/docker.yml"
+  end
+
+  # AWS
   config.vm.provider :aws do |aws, override|
     # AWS Account
     aws.access_key_id = ENV['AWS_ACCESS_KEY_ID']
