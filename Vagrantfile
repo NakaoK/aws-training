@@ -9,7 +9,8 @@ Vagrant.configure("2") do |config|
 
   # Ansible
   config.vm.provision "ansible_local" do |ansible|
-    ansible.playbook = "provision/common/docker.yml"
+    #ansible.playbook = "provision/common/docker.yml"
+    ansible.playbook = "provision/master.yml"
   end
 
   # AWS

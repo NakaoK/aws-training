@@ -1,32 +1,35 @@
-- hosts: all
-  become: yes 
-  tasks:
-    - name: apt-get install packages
-      apt: pkg={{ item }} state=present update_cache=yes
-      with_items:
-        - curl
-        - apt-transport-https
-        - ca-certificates
+- name: install dependencies packages
+  with_items:
+      - curl
+      - apt-transport-https
+      - ca-certificates
+  apt:
+      name: "{{ item }}"
+      state: present
+      update_cache: yes
 
-    - name: set dockers official gpg key
-      apt_key: 
-          url: "https://download.docker.com/linux/ubuntu/gpg"
-          state: present
-      register: set_key
+- name: set dockers official gpg key
+  apt_key: 
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+  register: set_key
 
-    - name: set up the stable repository
-      apt_repository: 
-        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
-        state: present
-      when: set_key 
-      register: set_repo
+- name: set up the stable repository
+  apt_repository: 
+      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+      state: present
+  when: set_key 
+  register: set_repo
 
-    - name: install docker-ce
-      apt: pkg=docker-ce state=present update_cache=yes
-      when:  set_repo
-      register: install_docker
+- name: install docker-ce
+  apt: 
+      pkg: docker-ce
+      state: present
+      update_cache: yes
+  when:  set_repo
+  register: install_docker
 
-    - name: add ubuntu user to docker group
-      user:
-          name: ubuntu
-          group: docker
+- name: add ubuntu user to docker group
+  user:
+      name: ubuntu
+      group: docker

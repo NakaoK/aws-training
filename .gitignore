@@ -1,2 +1,3 @@
 .vagrant/
 .env
+setup/provision/service/ethereumjs/testrpc/metamask.config

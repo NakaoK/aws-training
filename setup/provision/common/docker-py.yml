@@ -1,0 +1,7 @@
+- name: apt-get install pip
+  apt:
+      pkg: python-pip
+      state: present
+      update_cache: yes
+- pip:
+    name: docker-py

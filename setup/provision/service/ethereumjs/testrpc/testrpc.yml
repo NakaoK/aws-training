@@ -1,0 +1,22 @@
+- name: build docker image
+  docker_image:
+      name: ethereumjs/testrpc
+      tag: latest
+      state: present
+      path: /vagrant/docker/ethereumjs/testrpc
+  register: build
+
+- name: load metamask
+  command: cat /vagrant/provision/service/ethereumjs/testrpc/metamask.config
+  register: metamask
+  when: build
+
+- name: run docker container
+  docker:
+      name: testrpc
+      image: ethereumjs/testrpc:latest
+      state: started
+      ports: 8545:8545
+      command: testrpc -m "{{ metamask.stdout }}"
+  when: build
+
