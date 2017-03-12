@@ -3,7 +3,7 @@
       name: ethereumjs/testrpc
       tag: latest
       state: present
-      path: /vagrant/docker/ethereumjs/testrpc
+      path: /vagrant/dockerfile/ethereumjs/testrpc
   register: build
 
 - name: load metamask
