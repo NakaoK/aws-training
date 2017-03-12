@@ -1,7 +1,7 @@
 - hosts: all
   become: yes
   tasks:
-      - include: common/docker.yml
+      - include: common/docker-ce.yml
       - include: common/docker-py.yml
       - include: service/ethereumjs/testrpc/testrpc.yml
 
