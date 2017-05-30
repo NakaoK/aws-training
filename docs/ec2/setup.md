@@ -29,6 +29,13 @@
     $ vagrant -v
     Vagrant 1.9.2
     ```
+1. Install libiconv(Mac Only)  
+
+    ```
+    $ brew tap homebrew/dupes
+    $ brew install libxml2 libxslt libiconv
+    $ brew link --force libxml2 libxslt libiconv
+    ```
 1. Install plugin  
 
     ```
