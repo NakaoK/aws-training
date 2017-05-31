@@ -1,0 +1,19 @@
+- name: check the final result already exists
+  stat: path=/usr/local/bin/docker-compose
+  register: st
+
+- name: find out if build is necessary.
+  set_fact:
+      need_to_build: "{{ st.stat.exists == False or st.stat.size == 0 }}"
+
+- name: get docker-compose
+  get_url: url=https://github.com/docker/compose/releases/download/1.11.2/docker-compose-Linux-x86_64
+           dest=/usr/local/bin/docker-compose
+  when: need_to_build
+
+- name: set executable
+  file: 
+    path: /usr/local/bin/docker-compose
+    state: file
+    mode: 0755
+  when: need_to_build

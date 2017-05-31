@@ -3,5 +3,7 @@
   tasks:
       - include: common/docker-ce.yml
       - include: common/docker-py.yml
+      - include: system/swapfile.yml
       - include: service/ethereumjs/testrpc/testrpc.yml
-
+      - include: service/ethereumjs/truffle/truffle.yml
+      - include: common/docker-compose.yml

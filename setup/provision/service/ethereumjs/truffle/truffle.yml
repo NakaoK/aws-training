@@ -1,8 +1,8 @@
 - name: build docker image
   docker_image:
-      name: ethereumjs/testrpc
+      name: ethereumjs/truffle
       tag: latest
       state: present
-      path: /vagrant/dockerfile/ethereumjs/testrpc
+      path: /vagrant/dockerfile/ethereumjs/truffle
   register: build
 

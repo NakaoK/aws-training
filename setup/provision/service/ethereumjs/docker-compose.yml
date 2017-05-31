@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+    truffle:
+        image: ethereumjs/truffle
+        ports:
+            - "8888:8888"
+        links:
+            - testrpc
+    testrpc:
+        image: ethereumjs/testrpc
+        ports:
+            - "8545:8545"
+        env_file: ./metamask.env
+        command: testrpc -m ${METAMASK}
+
